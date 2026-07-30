@@ -1,0 +1,366 @@
+/* ============================================================
+   暖红拨盘番茄钟 —— 专属样式
+   高对比度暖红/橘红配色方案
+   ============================================================ */
+
+:root {
+  /* 主色：暖红珊瑚 */
+  --pomo-primary: #E63946;
+  --pomo-primary-dark: #C62B38;
+  --pomo-primary-light: #FF6B6B;
+  /* 次色：橘红 */
+  --pomo-secondary: #FF5722;
+  --pomo-secondary-dark: #E64A19;
+  --pomo-secondary-light: #FF8A65;
+  /* 背景：极深黑红 */
+  --pomo-bg: #140A0C;
+  --pomo-bg-card: #1C1014;
+  --pomo-bg-elevated: #241618;
+  /* 文字 */
+  --pomo-text: #FFF5F2;
+  --pomo-text-muted: rgba(255, 245, 242, 0.6);
+  --pomo-text-faint: rgba(255, 245, 242, 0.35);
+  /* 边框 */
+  --pomo-border: rgba(255, 245, 242, 0.1);
+  /* 阴影 */
+  --pomo-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 8px 24px rgba(230, 57, 70, 0.1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--pomo-bg);
+  color: var(--pomo-text);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+#app {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--pomo-bg);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+a { text-decoration: none; color: inherit; -webkit-tap-highlight-color: transparent; }
+button { font-family: inherit; border: none; background: none; cursor: pointer;
+         color: inherit; -webkit-tap-highlight-color: transparent; }
+
+/* ---------- 顶部导航 ---------- */
+.pomo-header {
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  padding-top: env(safe-area-inset-top);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--pomo-bg);
+}
+
+.header-back-link {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  color: var(--pomo-text);
+  transition: background 0.15s;
+}
+.header-back-link:active { background: var(--pomo-bg-elevated); }
+
+.pomo-title {
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.focus-toggle {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  color: var(--pomo-text-muted);
+  transition: all 0.2s;
+}
+.focus-toggle.is-active {
+  background: var(--pomo-primary);
+  color: var(--pomo-text);
+}
+.focus-toggle:active { background: var(--pomo-bg-elevated); }
+
+/* ---------- 主内容区 ---------- */
+.pomo-body {
+  flex: 1;
+  padding: 8px 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ---------- 状态条码 ---------- */
+.status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--pomo-text-muted);
+}
+.status-bar i {
+  width: 3px;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--pomo-text-faint);
+}
+
+/* ---------- 双拨盘面板 ---------- */
+.dial-panel {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1.15;
+  background: var(--pomo-bg-card);
+  border-radius: 24px;
+  overflow: hidden;
+  user-select: none;
+  touch-action: none;
+  box-shadow: var(--pomo-shadow);
+  cursor: grab;
+}
+.dial-panel.is-dragging { cursor: grabbing; }
+
+/* ---------- 时间显示 ---------- */
+.dial-display {
+  position: relative;
+  z-index: 2;
+  padding: 28px 28px 0;
+  pointer-events: none;
+}
+
+.dial-status {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--pomo-text-muted);
+}
+.dial-status.is-running { color: var(--pomo-primary-light); }
+.dial-status.is-paused { color: var(--pomo-secondary-light); }
+.dial-status.is-done { color: var(--pomo-secondary); }
+
+.dial-time {
+  font-size: 56px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -1.5px;
+  margin-top: 2px;
+}
+.dial-time-min { color: var(--pomo-primary); }
+.dial-time-sec { color: var(--pomo-secondary); }
+.dial-time-sep { opacity: 0.3; margin: 0 2px; }
+
+.dial-labels {
+  display: flex;
+  gap: 20px;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--pomo-text-muted);
+}
+.dial-label { transition: opacity 0.15s, color 0.15s; }
+.dial-label-outer::before,
+.dial-label-inner::before {
+  content: "●";
+  margin-right: 5px;
+}
+.dial-label-outer::before { color: var(--pomo-primary); }
+.dial-label-inner::before { color: var(--pomo-secondary); }
+.dial-label.is-active { color: var(--pomo-text); opacity: 1; }
+
+/* ---------- SVG 拨盘 ---------- */
+.dial-svg {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 85%;
+  height: 85%;
+  pointer-events: none;
+}
+
+.dial-track {
+  fill: none;
+  stroke-linecap: round;
+}
+.dial-track-outer { stroke: rgba(230, 57, 70, 0.12); stroke-width: 14; }
+.dial-track-inner { stroke: rgba(255, 87, 34, 0.12); stroke-width: 11; }
+
+.dial-progress {
+  fill: none;
+  stroke-linecap: round;
+}
+.dial-progress-outer { stroke: var(--pomo-primary); stroke-width: 14;
+  transition: stroke-dashoffset 0.12s ease-out, stroke-width 0.1s; }
+.dial-progress-inner { stroke: var(--pomo-secondary); stroke-width: 11;
+  transition: stroke-dashoffset 0.12s ease-out, stroke-width 0.1s; }
+.dial-panel.is-dragging .dial-progress { transition: none; }
+
+.dial-knob {
+  fill: var(--pomo-primary);
+  stroke: var(--pomo-text);
+  stroke-width: 2;
+  transition: r 0.1s;
+}
+.dial-knob-outer { fill: var(--pomo-primary); }
+.dial-knob-inner { fill: var(--pomo-secondary); }
+
+.dial-ticks line {
+  stroke: var(--pomo-text-faint);
+  stroke-width: 1;
+}
+.dial-ticks text {
+  fill: var(--pomo-text-faint);
+  font-size: 9px;
+  text-anchor: middle;
+  font-weight: 500;
+}
+
+/* ---------- 控制按钮 ---------- */
+.controls {
+  display: flex;
+  gap: 12px;
+}
+
+.ctrl-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 24px;
+  border-radius: 16px;
+  font-size: 15px;
+  font-weight: 600;
+  transition: transform 0.1s, background 0.2s, box-shadow 0.2s;
+}
+.ctrl-btn:active { transform: scale(0.97); }
+
+.ctrl-btn-start {
+  background: var(--pomo-primary);
+  color: var(--pomo-text);
+  box-shadow: 0 6px 20px rgba(230, 57, 70, 0.35);
+}
+.ctrl-btn-start:hover { background: var(--pomo-primary-light); }
+.ctrl-btn-start.is-paused { background: var(--pomo-secondary);
+  box-shadow: 0 6px 20px rgba(255, 87, 34, 0.35); }
+
+.ctrl-btn-reset {
+  background: var(--pomo-bg-elevated);
+  color: var(--pomo-text-muted);
+  border: 1px solid var(--pomo-border);
+}
+.ctrl-btn-reset:hover { color: var(--pomo-text); }
+
+/* ---------- 专注度检测卡片 ---------- */
+.focus-card {
+  background: var(--pomo-bg-card);
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid var(--pomo-border);
+  animation: cardIn 0.2s ease-out;
+}
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.focus-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.focus-card-head h3 {
+  font-size: 15px;
+  font-weight: 600;
+}
+.focus-score {
+  font-size: 24px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--pomo-primary);
+}
+
+.focus-metrics {
+  display: flex;
+  gap: 12px;
+}
+.focus-metric {
+  flex: 1;
+  background: var(--pomo-bg-elevated);
+  border-radius: 12px;
+  padding: 12px 8px;
+  text-align: center;
+}
+.focus-metric-label {
+  display: block;
+  font-size: 11px;
+  color: var(--pomo-text-faint);
+  margin-bottom: 4px;
+}
+.focus-metric-val {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.focus-metric-val.is-good { color: var(--pomo-secondary-light); }
+.focus-metric-val.is-warn { color: var(--pomo-primary); }
+
+.focus-note {
+  margin-top: 12px;
+  font-size: 11px;
+  color: var(--pomo-text-faint);
+  text-align: center;
+}
+
+/* ---------- 底部提示 ---------- */
+.pomo-hint {
+  font-size: 12px;
+  color: var(--pomo-text-faint);
+  text-align: center;
+  line-height: 1.7;
+  padding: 0 8px;
+}
+
+/* ---------- 完成脉冲动画 ---------- */
+@keyframes pulseGlow {
+  0%, 100% { filter: drop-shadow(0 0 4px rgba(230, 57, 70, 0.6)); }
+  50% { filter: drop-shadow(0 0 12px rgba(255, 87, 34, 0.8)); }
+}
+.dial-time.is-done { animation: pulseGlow 2s ease-in-out infinite; }
+
+/* ---------- 桌面端适配 ---------- */
+@media (min-width: 600px) {
+  .dial-display { padding: 36px 36px 0; }
+  .dial-time { font-size: 64px; }
+  .dial-svg { width: 88%; height: 88%; }
+}
+
+/* ---------- 移动端适配 ---------- */
+@media (max-width: 380px) {
+  .dial-time { font-size: 46px; }
+  .dial-display { padding: 22px 22px 0; }
+  .ctrl-btn { padding: 12px 16px; font-size: 14px; }
+  .focus-metrics { gap: 8px; }
+  .focus-metric { padding: 10px 6px; }
+}
