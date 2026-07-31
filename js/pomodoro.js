@@ -147,10 +147,10 @@
     knobInner.setAttribute('cy', CY - R_INNER * Math.cos(innerAngle));
 
     // 激活状态下的 Knob 放大
-    progressOuter.setAttribute('stroke-width', activeDial === 'outer' ? 18 : 14);
-    knobOuter.setAttribute('r', activeDial === 'outer' ? 13 : 10);
-    progressInner.setAttribute('stroke-width', activeDial === 'inner' ? 15 : 11);
-    knobInner.setAttribute('r', activeDial === 'inner' ? 11 : 8);
+    progressOuter.setAttribute('stroke-width', activeDial === 'outer' ? 32 : 25);
+    knobOuter.setAttribute('r', activeDial === 'outer' ? 23 : 18);
+    progressInner.setAttribute('stroke-width', activeDial === 'inner' ? 27 : 20);
+    knobInner.setAttribute('r', activeDial === 'inner' ? 20 : 14);
 
     // 过渡样式
     const transMode = isRunning

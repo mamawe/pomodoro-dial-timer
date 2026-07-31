@@ -201,16 +201,16 @@ button { font-family: inherit; border: none; background: none; cursor: pointer;
   fill: none;
   stroke-linecap: round;
 }
-.dial-track-outer { stroke: rgba(230, 57, 70, 0.12); stroke-width: 14; }
-.dial-track-inner { stroke: rgba(255, 87, 34, 0.12); stroke-width: 11; }
+.dial-track-outer { stroke: rgba(230, 57, 70, 0.12); stroke-width: 25; }
+.dial-track-inner { stroke: rgba(255, 87, 34, 0.12); stroke-width: 20; }
 
 .dial-progress {
   fill: none;
   stroke-linecap: round;
 }
-.dial-progress-outer { stroke: var(--pomo-primary); stroke-width: 14;
+.dial-progress-outer { stroke: var(--pomo-primary); stroke-width: 25;
   transition: stroke-dashoffset 0.12s ease-out, stroke-width 0.1s; }
-.dial-progress-inner { stroke: var(--pomo-secondary); stroke-width: 11;
+.dial-progress-inner { stroke: var(--pomo-secondary); stroke-width: 20;
   transition: stroke-dashoffset 0.12s ease-out, stroke-width 0.1s; }
 .dial-panel.is-dragging .dial-progress { transition: none; }
 
