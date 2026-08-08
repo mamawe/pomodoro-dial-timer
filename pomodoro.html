@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#140a0c">
   <title>暖红拨盘番茄钟</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
   <link rel="stylesheet" href="css/pomodoro.css">
 </head>
 <body>
@@ -12,9 +14,6 @@
 
   <!-- 顶部导航 -->
   <header class="pomo-header">
-    <a class="header-back-link" href="index.html#/home" aria-label="返回首页">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg>
-    </a>
     <h1 class="pomo-title">暖红拨盘番茄钟</h1>
     <button class="focus-toggle" id="focusToggle" type="button" aria-label="专注度检测">
       <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/></svg>
@@ -114,5 +113,10 @@
 </div>
 
 <script src="js/pomodoro.js"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  }
+</script>
 </body>
 </html>
