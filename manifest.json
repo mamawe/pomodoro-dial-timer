@@ -2,7 +2,7 @@
   "name": "暖红拨盘番茄钟",
   "short_name": "番茄钟",
   "description": "右下角双拨盘交互 · 专注度检测 · 暖红高对比度主题",
-  "start_url": "./pomodoro.html",
+  "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",

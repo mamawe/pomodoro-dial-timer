@@ -1,6 +1,7 @@
 const CACHE_NAME = 'pomodoro-v1';
 const ASSETS = [
   './',
+  './index.html',
   './pomodoro.html',
   './css/pomodoro.css',
   './js/pomodoro.js',
